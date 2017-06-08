@@ -10,6 +10,10 @@ class CheckoutTest extends FunSpec with Matchers {
     it("An orange costs 25p") {
       Checkout.calculateTotal(List(Orange)) should equal(0.25)
     }
+
+    it("A banana costs 20p") {
+      Checkout.calculateTotal(List(Banana)) should equal(0.20)
+    }
   }
 
   describe("Calculate the cost for multiple pieces of fruit") {
@@ -28,12 +32,28 @@ class CheckoutTest extends FunSpec with Matchers {
       Checkout.calculateTotal(List(Orange, Orange, Orange, Orange)) should equal(0.75)
     }
 
+    it("Calculate the total cost for multiple bananas") {
+      // there's a 'buy one get one free' offer on bananas
+      Checkout.calculateTotal(List(Banana, Banana)) should equal(0.20)
+      Checkout.calculateTotal(List(Banana, Banana, Banana)) should equal(0.40)
+      Checkout.calculateTotal(List(Banana, Banana, Banana, Banana)) should equal(0.40)
+      Checkout.calculateTotal(List(Banana, Banana, Banana, Banana, Banana)) should equal(0.60)
+    }
+
     it("Calculate the total cost for one apple and one orange") {
       Checkout.calculateTotal(List(Apple, Orange)) should equal(0.85)
     }
 
-    it("Calculate the total cost for a mix of apples and oranges") {
-      Checkout.calculateTotal(List(Apple, Apple, Orange, Apple)) should equal(1.45)
+    it("Calculate the total cost for an apple, an orange, and a banana") {
+      Checkout.calculateTotal(List(Apple, Orange, Banana)) should equal(0.85)
+    }
+
+    it("Calculate the total cost for a mix of apples, oranges, and bananas") {
+      Checkout.calculateTotal(List(Apple, Apple, Orange, Apple, Banana)) should equal(1.45)
+    }
+
+    it("When bananas and apples are mixed, the cheapest item in the offer is free") {
+      Checkout.calculateTotal(List(Apple, Banana)) should equal(0.60)
     }
   }
 }

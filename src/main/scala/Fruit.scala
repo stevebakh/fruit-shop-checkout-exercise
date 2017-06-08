@@ -9,3 +9,7 @@ case object Apple extends Fruit {
 case object Orange extends Fruit {
   override val price: BigDecimal = 0.25
 }
+
+case object Banana extends Fruit {
+  override val price: BigDecimal = 0.20
+}
