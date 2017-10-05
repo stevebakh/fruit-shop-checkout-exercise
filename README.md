@@ -17,5 +17,5 @@ Update the existing checkout code to support a "3 for the price of 2" offer on o
 ## Bonus round
 Business is booming! The fruit shop decides to expand. Update the existing checkout code to support the sale of bananas.
 * Bananas cost 20p
-* Bananas are included in the **same** "buy one get one free" offer as the examples
+* Bananas are included in the **same** "buy one get one free" offer as the apples
 * When apples and bananas are mixed, the cheapest item in the offer is free
