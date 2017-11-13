@@ -6,23 +6,17 @@ object Checkout {
   }
 
   private def bogofDiscount(items: List[Fruit]): BigDecimal = {
-    val applesAndBananas = items.filter {
-      case (Apple | Banana) => true
-      case _ => false
+    val applesAndBananas = items.collect {
+      case a: Apple.type => a
+      case b: Banana.type => b
     }.sortBy(_.price)
 
     applesAndBananas.take(applesAndBananas.size / 2).map(_.price).sum
   }
 
   private def threeForTwoDiscount(items: List[Fruit]): BigDecimal = {
-    val oranges = items.filter {
-      case Orange => true
-      case _ => false
-    }
-
-    if (oranges.size < 3)
-      0
-    else
-      oranges.grouped(3).count(_.size == 3) * Orange.price
+    items.collect { case o: Orange.type => o }
+      .grouped(3)
+      .count(_.size == 3) * Orange.price
   }
 }
